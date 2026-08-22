@@ -1,0 +1,29 @@
+# Cyan// 0.1.0 remote status/list skin
+# Target: iRiver H1x0 remote, 128x64x1
+# License: CC-BY-SA-3.0
+#
+# Five native ten-pixel rows remain firmware-owned. Cyan supplies only the
+# header, selected-row template, and compact Hold distinction. The old footer
+# was removed to fund the larger type.
+
+%xl(B,remote-battery.bmp,0,0,6)
+%xl(C,remote-charging.bmp,0,0)
+%xl(E,remote-powered.bmp,0,0)
+%xl(H,remote-hold.bmp,0,0,2)
+
+%Vi(remote,0,10,128,54,1)
+
+# Native list context scrolls inside a battery-safe title viewport.
+%V(1,0,89,10,1)
+%s%al%?Lt<%Lt|CYAN//>
+%V(92,0,9,9,-)
+%?mr<%xd(Hb)|%?mh<%xd(Ha)|>>
+%V(102,0,9,10,1)
+%ar%?mr<R|%?mh<M|>>
+%V(113,1,14,7,-)
+%?bp<%?bc<%xd(C)|%xd(E)>|%?bl<%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)>>
+
+# Full-width inverse selection with the same prompt language as the main SBS.
+%Vl(i,0,0,128,10,1)
+%?Lc<%Vs(invert)|%Vs(clear)>%?Lc<%>%>|    > %LT
+%Lb(i,128,10)
