@@ -1,0 +1,85 @@
+# Cyan// 0.1.0 release-candidate Now Playing and status skin
+# Target: iRiver H120/H140, 160x128x2
+# License: CC-BY-SA-3.0
+#
+# Geometry: 16 px header, three metadata tiers, progress/time rail, and a
+# compact bottom status rail. No album art or technical codec metadata.
+
+%wd
+
+%Fl(2,18-Terminus-Bold.fnt)
+%Fl(3,16-Terminus.fnt)
+%Fl(4,12-Terminus.fnt)
+%Fl(5,14-Terminus-Bold.fnt)
+
+# State assets use vertical bitmap strips where appropriate.
+%xl(P,playback.bmp,0,0,5)
+%xl(B,battery.bmp,0,0,6)
+%xl(C,charging.bmp,0,0)
+%xl(E,powered.bmp,0,0)
+%xl(R,repeat.bmp,0,0,3)
+%xl(H,shuffle.bmp,0,0)
+%xl(S,seek.bmp,0,0)
+%xl(L,hold.bmp,0,0)
+%xl(T,sleep.bmp,0,0)
+
+# Header and battery. Playback state is centered in the bottom rail.
+%V(0,0,136,15,5)
+%al%?mp<Now Playing|Now Playing|Now Playing|SEEK//FORWARD|SEEK//REWIND>
+%V(140,4,18,7,-)
+%?bp<%?bc<%xd(C)|%xd(E)>|%?bl<%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)>>
+%V(0,15,160,1,-)
+%dr(0,0,-,-,0)
+
+# Primary metadata. Each field scrolls independently when necessary.
+%V(2,20,156,22,2)
+%s%al%?it<%it|%fn>
+%V(2,45,156,18,3)
+%s%al%?ia<%ia|Unknown Artist>
+# In the final seven seconds, replace only the lower-priority album line with
+# next-track metadata. If no next file exists, retain the current album.
+%?pE(7)<%?Fn<%Vd(u)|%Vd(a)>|%Vd(a)>
+%Vl(a,2,66,156,14,4)
+%s%al%?id<%id|Unknown Album>
+%Vl(u,2,66,156,14,4)
+%s%alUP NEXT// %?It<%It|%Fn> / %?Ia<%Ia|Unknown Artist>
+
+# Progress sits above elapsed/remaining time. The five-pixel rail keeps its
+# normal height while seeking. Short border continuations inside the seek
+# bitmap visually seat the diamond in the bar without removing its white edge.
+%?mp<%Vd(n)|%Vd(n)|%Vd(n)|%Vd(s)|%Vd(s)>
+%Vl(n,2,84,156,5,-)
+%pb(0,0,156,5)
+%Vl(s,2,82,156,9,-)
+%pb(0,2,156,5)
+%pb(0,0,156,9,nobar,slider,S)
+%V(2,94,68,12,4)
+%al%pc
+%V(90,94,68,12,4)
+%ar%pr
+
+# Sparse normal status rail. Repeat and shuffle consume pixels only when active.
+# Playback state stays at bottom center. While volume changes, its compact text
+# becomes a meter and the normal rail indicators are temporarily hidden.
+%V(0,108,160,1,-)
+%dr(0,0,-,-,0)
+%V(2,113,80,14,4)
+%?mv(2)<|%?bs<%alSLEEP// %bs|>>
+%V(75,113,11,11,-)
+%?mv(2)<|%?mp<%xd(Pa)|%xd(Pb)|%xd(Pc)|%xd(Pd)|%xd(Pe)>>
+# Compact Hold and sleep marks are absent when their native states are off.
+%V(63,114,9,9,-)
+%?mv(2)<|%?mh<%xd(L)>>
+%V(89,114,13,9,-)
+%?mv(2)<|%?bs<%xd(T)>>
+%V(105,114,13,9,-)
+%?mv(2)<|%?ps<%xd(H)>>
+%V(123,114,13,9,-)
+%?mv(2)<|%?mm<|%xd(Ra)|%xd(Rb)||%xd(Rc)>>>
+
+# Volume temporarily takes over the full bottom rail during adjustment and for
+# two seconds after; normal playback/mode indicators are hidden during takeover.
+%V(2,113,30,14,4)
+%?mv(2)<%alVOL|>
+%V(34,114,124,9,-)
+%?mv(2)<%pv(0,0,124,9)|>

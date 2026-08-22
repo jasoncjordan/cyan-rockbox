@@ -1,0 +1,146 @@
+# Cyan// 0.1.0 release-candidate browser skin
+# Target: iRiver H120/H140, 160x128x2
+# License: CC-BY-SA-3.0
+#
+# Geometry: 16 px header + 96 px list + 16 px footer. Normal lists use six
+# 16-pixel rows. Rockbox's native Track Info screen uses eight denser 12-pixel
+# rows so every firmware-provided metadata field remains available by scrolling.
+# Font 1 comes from the active comparison .cfg (14, 14 Bold, or 16 Terminus).
+
+%Fl(2,14-Terminus-Bold.fnt)
+%Fl(3,12-Terminus.fnt)
+
+# Shared upper-right battery treatment for every browser/menu screen.
+%xl(B,battery.bmp,0,0,6)
+%xl(C,charging.bmp,0,0)
+%xl(E,powered.bmp,0,0)
+%xl(D,disk.bmp,0,0)
+%xl(I,__list_icons__,20,1,32)
+%xl(Q,record-state.bmp,118,1,2)
+
+# Declare normal and dense native-list viewports. QuickScreen keeps its native
+# four-way drawing inside the 12-Terminus instrument viewport. Track Info and
+# System Info use the dense technical viewport.
+%Vi(main,0,16,160,96,1)
+%Vi(tech,0,16,160,96,3)
+%Vi(inst,0,16,160,96,3)
+%Vi(control,0,16,160,96,1)
+%?if(%cs, =, 20)<%VI(tech)|%?if(%cs, =, 16)<%VI(tech)|%?if(%cs, =, 3)<%VI(inst)|%?if(%cs, =, 10)<%VI(control)|%?if(%cs, =, 11)<%VI(inst)|%?if(%cs, =, 17)<%VI(inst)|%VI(main)>>>>>>
+
+# Header. Using %Lt suppresses Rockbox's automatic list title. Revised
+# Milestone 4 gives native playback-support lists concise Cyan identities;
+# every other list keeps its useful native context title.
+%Vl(h,0,0,136,15,2)
+%s%?Lt<%Lt|CYAN//>
+%Vl(g,0,0,136,15,2)
+%s%alCONFIG / %?Lt<%Lt|SETTINGS>
+%Vl(f,0,0,136,15,2)
+%s%alFILES / %?Lt<%Lt|ROOT>
+%Vl(m,0,0,136,15,2)
+%s%alMUSIC / %?Lt<%Lt|BROWSE>
+%Vl(u,0,0,136,15,2)
+%alQUEUE//
+%Vl(p,0,0,136,15,2)
+%alPLAYLISTS//
+%Vl(c,0,0,136,15,2)
+%alACTION//
+%Vl(s,0,0,136,15,2)
+%alSHORTCUTS//
+%Vl(t,0,0,116,15,2)
+%al[ TRACK//INFO ]
+%Vl(r,0,0,116,15,2)
+%s%al[ RECORD//%?if(%St(rec source), =, mic)<MIC|%?if(%St(rec source), =, line)<LINE|%?if(%St(rec source), =, spdif)<SPDIF|FM>>>%?if(%St(spdif enable), =, on)</OUT|> ]
+%Vl(o,0,0,136,15,2)
+%alTOOLS//
+%Vl(x,0,0,136,15,2)
+%alQUICK//
+%Vl(v,0,0,132,15,2)
+%alPITCH//
+%Vl(e,0,0,136,15,2)
+%s%alCONFIG / %?Lt<%Lt|VALUE>
+%Vl(y,0,0,116,15,2)
+%al[ SYSTEM//INFO ]
+%Vl(d,0,0,132,15,2)
+%alCLOCK//
+%Vl(b,0,0,136,15,2)
+%alBOOKMARKS//
+%?if(%cs, =, 3)<%Vd(r)>
+%?if(%cs, =, 5)<%Vd(u)>
+%?if(%cs, =, 6)<%Vd(g)>
+%?if(%cs, =, 7)<%Vd(f)>
+%?if(%cs, =, 8)<%Vd(m)>
+%?if(%cs, =, 9)<%Vd(o)>
+%?if(%cs, =, 10)<%Vd(x)>
+%?if(%cs, =, 11)<%Vd(v)>
+%?if(%cs, =, 12)<%Vd(e)>
+%?if(%cs, =, 13)<%Vd(p)>
+%?if(%cs, =, 15)<%Vd(c)>
+%?if(%cs, =, 16)<%Vd(y)>
+%?if(%cs, =, 17)<%Vd(d)>
+%?if(%cs, =, 18)<%Vd(b)>
+%?if(%cs, =, 19)<%Vd(s)>
+%?if(%cs, =, 20)<%Vd(t)>
+%?and(%if(%cs, !=, 3),%if(%cs, !=, 5),%if(%cs, !=, 6),%if(%cs, !=, 7),%if(%cs, !=, 8),%if(%cs, !=, 9),%if(%cs, !=, 10),%if(%cs, !=, 11),%if(%cs, !=, 12),%if(%cs, !=, 13),%if(%cs, !=, 15),%if(%cs, !=, 16),%if(%cs, !=, 17),%if(%cs, !=, 18),%if(%cs, !=, 19),%if(%cs, !=, 20))<%Vd(h)>
+%V(118,1,13,13,-)
+%?if(%cs, =, 3)<%?mp<|||||%xd(Qa)|%xd(Qb)||>>
+%V(133,5,5,5,-)
+%?lh<%xd(D)>
+%V(140,4,18,7,-)
+%?bp<%?bc<%xd(C)|%xd(E)>|%?bl<%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)>>
+%V(0,15,126,1,-)
+%dr(0,0,-,-,0)
+%V(131,15,29,1,-)
+%dr(0,0,-,-,0)
+
+# Four short datum rails frame the native QuickScreen's directional center
+# without covering the four firmware-owned setting labels and values.
+%Vl(qn,79,42,1,14,-)%dr(0,0,-,-,0)
+%Vl(qs,79,70,1,14,-)%dr(0,0,-,-,0)
+%Vl(qw,56,63,15,1,-)%dr(0,0,-,-,0)
+%Vl(qe,89,63,15,1,-)%dr(0,0,-,-,0)
+%?if(%cs, =, 10)<%Vd(qn)%Vd(qs)%Vd(qw)%Vd(qe)>
+
+# One 16-pixel item template, repeated by %Lb. The selected item is inverted
+# and receives an oversized double-chevron prompt; unselected rows retain
+# alignment. This makes the actionable cursor easier to acquire at a glance.
+%Vl(i,0,0,160,16,1)
+%?Lc<%Vs(invert)|%Vs(clear)>%?if(%LI, >=, 0)<%xd(I,%LI)>%?Lc<%>%>|  >   %LT
+
+# Current Playlist stays native but gains queue-like line numbers. Icon_Audio
+# from Rockbox's playlist callback (the numeric %LI value 0) becomes an
+# explicit NOW> marker, independently of Cyan's inverse selected cursor.
+# Context Menu and Shortcuts keep native text/actions with a command prompt.
+%Vl(q,0,0,160,16,1)
+%?Lc<%Vs(invert)|%Vs(clear)>%?Lc<%>%>|    > %?if(%LI, =, 0)<NOW%>|     >%LN %LT
+%Vl(a,0,0,160,16,1)
+%?Lc<%Vs(invert)|%Vs(clear)>%?if(%LI, >=, 0)<%xd(I,%LI)>%?Lc<%>%>|::>   %LT
+
+# Track Info remains Rockbox's native paired label/value list. The compact
+# template adds terse TUI prompts without recreating or filtering metadata.
+%Vl(k,0,0,160,12,3)
+%?Lc<%Vs(invert)|%Vs(clear)>%?Lc<%>%>|::> %LT
+# Setting Chooser is a focused modal; Plugin Browser remains a command
+# launcher. System Info uses dense workstation-like rows without changing the
+# firmware-provided values.
+%Vl(j,0,0,160,16,1)
+%?Lc<%Vs(invert)|%Vs(clear)>%?if(%LI, >=, 0)<%xd(I,%LI)>%?Lc<%>%>|::>   %LT
+%Vl(z,0,0,160,12,3)
+%?Lc<%Vs(invert)|%Vs(clear)>%?Lc<%>%>|::> %LT
+%?if(%cs, =, 5)<%Lb(q,160,16)>
+%?if(%cs, =, 9)<%Lb(a,160,16)>
+%?if(%cs, =, 12)<%Lb(j,160,16)>
+%?if(%cs, =, 15)<%Lb(a,160,16)>
+%?if(%cs, =, 16)<%Lb(z,160,12)>
+%?if(%cs, =, 19)<%Lb(a,160,16)>
+%?if(%cs, =, 20)<%Lb(k,160,12)>
+%?and(%if(%cs, !=, 5),%if(%cs, !=, 9),%if(%cs, !=, 10),%if(%cs, !=, 11),%if(%cs, !=, 12),%if(%cs, !=, 15),%if(%cs, !=, 16),%if(%cs, !=, 17),%if(%cs, !=, 19),%if(%cs, !=, 20))<%Lb(i,160,16)>
+
+# Sparse footer. Battery state now lives consistently in the header.
+%V(0,112,78,1,-)
+%dr(0,0,-,-,0)
+%V(82,112,78,1,-)
+%dr(0,0,-,-,0)
+%V(0,114,80,14,3)
+%?if(%cs, =, 20)<%alMETA//NATIVE|%?if(%cs, =, 3)<%alREC//%?Rr<%Rh:%Rn:%Rs|READY>|%?if(%cs, =, 10)<%alN:TOP S:BOT|%?if(%cs, =, 12)<%alVALUE//CHOOSE|%?if(%cs, =, 16)<%alDATA//LIVE|%?if(%cs, =, 18)<%alSELECT:RESUME|%?if(%cs, =, 9)<%alSELECT:RUN|%?if(%cs, =, 5)<%alNOW//CURRENT|%alSELECT:OPEN>>>>>>>>
+%V(80,114,78,14,3)
+%?if(%cs, =, 20)<%arLEFT:BACK|%?if(%cs, =, 3)<%ar%Rf/%Re%?Rm</M|/S>|%?if(%cs, =, 10)<%arW:LEFT E:RGT|%?if(%cs, =, 12)<%arSELECT:APPLY|%?if(%cs, =, 16)<%arSELECT:REFRESH|%?if(%cs, =, 18)<%arLEFT:BACK|%?if(%cs, =, 9)<%arLEFT:BACK|%?if(%cs, =, 5)<%arSELECT:PLAY|%arLEFT:BACK>>>>>>>>

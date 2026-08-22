@@ -1,0 +1,53 @@
+# Cyan// 0.1.0 remote While Playing Screen
+# Target: iRiver H1x0 remote, 128x64x1
+# License: CC-BY-SA-3.0
+#
+# A separate glanceable interface: two metadata rows, progress/time, playback,
+# volume, battery, and distinct main/remote Hold text. Font 1 is the configured
+# 10-ProFont; no main-screen layout is scaled down here.
+
+%wd
+
+%xl(P,remote-playback.bmp,0,0,5)
+%xl(B,remote-battery.bmp,0,0,6)
+%xl(C,remote-charging.bmp,0,0)
+%xl(E,remote-powered.bmp,0,0)
+%xl(H,remote-hold.bmp,0,0,2)
+
+# Track identity starts at the top; the dedicated identity header was removed
+# so the remote can use a two-pixel-larger font. Battery retains its fixed
+# upper-right region.
+%V(1,0,110,10,1)
+%s%al%?it<%it|%fn>
+%V(113,1,14,7,-)
+%?bp<%?bc<%xd(C)|%xd(E)>|%?bl<%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)>>
+%V(1,11,126,10,1)
+%s%al%?ia<%ia|Unknown Artist>
+
+# Progress and elapsed/remaining time.
+%V(1,23,126,5,-)
+%pb(0,0,126,5)
+%V(1,29,55,10,1)
+%al%pc
+%V(72,29,55,10,1)
+%ar%pr
+%V(0,40,128,1,-)
+%dr(0,0,-,-,0)
+
+# Compact remote status. Volume is transient instead of permanently consuming
+# space that is more useful for sleep state and Cyan identity.
+%V(1,42,52,10,1)
+%?mv(2)<%alVOL %pv|%?bs<%alSLEEP %bs|%alCYAN//>>
+%V(60,42,9,9,-)
+%?mp<%xd(Pa)|%xd(Pb)|%xd(Pc)|%xd(Pd)|%xd(Pe)>
+%V(76,42,51,10,1)
+%ar%?mp<STOP|PLAY|PAUSE|FWD|REW>
+
+# Main-unit and remote locks are intentionally named, with remote Hold taking
+# priority if both switches are active.
+%V(1,54,58,10,1)
+%alSTATE//
+%V(59,54,9,9,-)
+%?mr<%xd(Hb)|%?mh<%xd(Ha)|>>
+%V(70,54,57,10,1)
+%ar%?mr<R.HOLD|%?mh<M.HOLD|%?bs<SLEEP %bs|READY>>>

@@ -1,0 +1,41 @@
+# Cyan// 0.1.0 remote FM instrumentation skin
+# Target: iRiver H1x0 remote, 128x64x1
+# License: CC-BY-SA-3.0
+
+%wd
+
+%xl(B,remote-battery.bmp,0,0,6)
+%xl(C,remote-charging.bmp,0,0)
+%xl(E,remote-powered.bmp,0,0)
+%xl(F,remote-fm-state.bmp,0,0,4)
+
+# Identity and power remain fixed while receiver data changes beneath them.
+%V(1,0,72,10,1)
+%al[ RADIO//RX ]
+%V(75,0,9,9,-)
+%?tt<%xd(Fa)|%xd(Fb)>
+%V(86,0,9,9,-)
+%?ts<%xd(Fc)|%xd(Fd)>
+%V(113,1,14,7,-)
+%?bp<%?bc<%xd(C)|%xd(E)>|%?bl<%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)>>
+
+# Large, glanceable frequency with preset context beneath it.
+%V(1,11,126,10,1)
+%alFREQ// %tf MHz
+%V(1,22,126,10,1)
+%s%alPRE// %?Ti<%?Tn<%Tn|%Ti/%Tc>|NONE>
+
+# Native RSSI rail and terse receiver-state cells.
+%V(1,34,126,5,-)
+%tr(0,0,126,5)
+%V(1,41,39,10,1)
+%al%?tt<LOCK|SEEK>
+%V(44,41,40,10,1)
+%ac%?ts<ST|MONO>
+%V(88,41,39,10,1)
+%ar%tr
+
+%V(0,52,128,1,-)
+%dr(0,0,-,-,0)
+%V(1,54,126,10,1)
+%?mp<|||||||%alRX//LIVE|%alRX//MUTED>

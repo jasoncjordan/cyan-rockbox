@@ -1,0 +1,69 @@
+# Cyan// 0.1.0 H1x0 FM instrumentation skin
+# Target: iRiver H120/H140, 160x128x2
+# License: CC-BY-SA-3.0
+
+%wd
+
+%Fl(2,18-Terminus-Bold.fnt)
+%Fl(3,14-Terminus-Bold.fnt)
+%Fl(4,12-Terminus.fnt)
+
+%xl(B,battery.bmp,0,0,6)
+%xl(C,charging.bmp,0,0)
+%xl(E,powered.bmp,0,0)
+%xl(F,fm-state.bmp,0,0,4)
+
+# Receiver header and fixed power state.
+%V(0,0,110,15,3)
+%al[ RADIO//RX ]
+%V(112,1,13,13,-)
+%?tt<%xd(Fa)|%xd(Fb)>
+%V(126,1,13,13,-)
+%?ts<%xd(Fc)|%xd(Fd)>
+%V(140,4,18,7,-)
+%?bp<%?bc<%xd(C)|%xd(E)>|%?bl<%xd(Ba)|%xd(Bb)|%xd(Bc)|%xd(Bd)|%xd(Be)|%xd(Bf)>>
+%V(0,15,52,1,-)
+%dr(0,0,-,-,0)
+%V(55,15,50,1,-)
+%dr(0,0,-,-,0)
+%V(108,15,52,1,-)
+%dr(0,0,-,-,0)
+
+# User preset identity only; never fabricate an RDS/station name.
+%V(2,18,156,14,4)
+%s%alPRESET// %?Ti<%?Tn<%Tn|%Ti/%Tc>|NONE>
+
+# Frequency is the primary instrument readout.
+%V(2,35,156,22,2)
+%alFREQ// %tf MHz
+
+# Real RSSI occupies the instrument rail: its fill is receiver strength, not
+# a decorative or playback-derived frequency position.
+%V(2,58,80,12,4)
+%alRSSI//
+%V(82,58,76,12,4)
+%ar%tr
+%V(2,70,156,5,-)
+%tr(0,0,156,5)
+
+# Three independent receiver-state cells.
+%V(2,77,50,12,4)
+%alMODE:%?tm<SCAN|PRE>
+%V(55,77,50,12,4)
+%acRF:%?tt<LOCK|SEEK>
+%V(108,77,50,12,4)
+%arAUDIO:%?ts<ST|MO>
+
+# RDS text appears only where the tuner actually exposes it. Otherwise show
+# the real regional band limits.
+%V(2,92,156,12,4)
+%?tx<%s%alRDS// %tz|%alBAND// %ta-%tb MHz>
+
+%V(0,109,78,1,-)
+%dr(0,0,-,-,0)
+%V(82,109,78,1,-)
+%dr(0,0,-,-,0)
+%V(2,114,90,12,4)
+%al%?mp<|||||||RX//LIVE|RX//MUTED>
+%V(94,114,64,12,4)
+%ar%?tt<LOCK:TRUE|LOCK:FALSE>
