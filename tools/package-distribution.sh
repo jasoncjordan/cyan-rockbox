@@ -22,7 +22,7 @@ cp "$distribution_dir/Cyan-0.1.0-h1x0.zip" \
 cp "$distribution_root/LICENSE" \
     "$distribution_stage/$distribution_name/"
 cp "$distribution_root/docs/installation.md" \
-    "$distribution_stage/$distribution_name/INSTALLATION.md"
+    "$distribution_stage/$distribution_name/installation.md"
 cp "$distribution_root/docs/compatibility.md" \
     "$distribution_stage/$distribution_name/COMPATIBILITY.md"
 cp "$distribution_root/docs/release.md" \
@@ -31,6 +31,8 @@ cp "$distribution_root/docs/final-validation.md" \
     "$distribution_stage/$distribution_name/final-validation.md"
 cp "$distribution_root/docs/testing.md" \
     "$distribution_stage/$distribution_name/testing.md"
+cp "$distribution_root/docs/screen-matrix.md" \
+    "$distribution_stage/$distribution_name/screen-matrix.md"
 cp "$distribution_root/docs/screenshots/README.md" \
     "$distribution_stage/$distribution_name/screenshots/README.md"
 cp "$distribution_root"/docs/screenshots/*.png \

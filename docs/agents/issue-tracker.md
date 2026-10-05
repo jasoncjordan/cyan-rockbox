@@ -1,8 +1,14 @@
 # Issue tracker: GitHub
 
-Issues and specs for this repo live in GitHub Issues for `jasoncjordan/cyan-rockbox`. Use the `gh` CLI from this clone; outside it, specify `--repo jasoncjordan/cyan-rockbox`.
+Work tickets and new implementation specs produced by the engineering skills live in GitHub Issues for `jasoncjordan/cyan-rockbox`. Use the `gh` CLI from this clone; outside it, specify `--repo jasoncjordan/cyan-rockbox`.
 
 These conventions describe how to perform authorized work. Follow the external-write authorization requirements in `AGENTS.md` before creating or changing GitHub content.
+
+## Existing project specifications
+
+Root `PRD.md` remains the authoritative product requirements and roadmap. Supporting design, implementation, validation, and milestone records remain in the repository, indexed by `docs/README.md`.
+
+For reviews of work that predates GitHub tickets, explicitly use `PRD.md` and the relevant design or milestone records as the spec source. Completed milestone reports remain historical evidence. Track unfinished work in GitHub with links to the existing procedures and acceptance criteria.
 
 ## Conventions
 

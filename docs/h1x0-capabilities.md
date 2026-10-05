@@ -20,17 +20,17 @@ use internally but a theme cannot directly inspect.
 | Line input | `SRC_CAP_LINEIN` | `%St(rec source)` plus native recorder | Surface the real selected source | P2, implemented pending hardware |
 | FM recording input | `SRC_CAP_FMRADIO` | `%St(rec source)` plus native recorder | Surface the real selected source | P2, implemented pending hardware |
 | S/PDIF recording input | `SRC_CAP_SPDIF` | `%St(rec source)`; native recorder exposes live S/PDIF sample rate | Show selected digital input without claiming signal lock | P2, implemented to exposed boundary pending hardware |
-| S/PDIF output | `HAVE_SPDIF_OUT` and controllable power | `%St(spdif enable)` | Show `D.OUT` only when the output-enable setting is on | P2, implemented pending hardware |
+| S/PDIF output | `HAVE_SPDIF_OUT` and controllable power | `%St(spdif enable)` | Append `/OUT` to the recording header only when the output-enable setting is on | P2, implemented pending hardware |
 | Sample rates | Playback supports 44.1/22.05/11.025 kHz; recording supports same mask | File frequency `%ff/%fk`; native recorder settings/body | Track Info remains native; recorder display only where exposed | P0 technical / P2 recording |
 | Battery level | Voltage-measured battery model | `%bl`, `%bv`, `%bt` | Graphical level on everyday screens; detailed values only on technical screens | P0, graphical level implemented |
 | Charging | Simple hardware-controlled charging | `%bp`; `%bc` may depend on software charge reporting and must be physically verified | Charging image already implemented; verify actual H120 reporting | P1, implemented pending hardware |
 | Sleep timer | Rockbox feature | `%bs` remaining time | Compact bitmap mark only while active | P1 / Milestone 3, implemented pending hardware |
-| Disk storage/activity | ATA, LBA48, disk storage, ATA LED control | `%lh` virtual LED | Tiny activity indicator only on technical/system surfaces unless unobtrusive | P3, pending |
+| Disk storage/activity | ATA, LBA48, disk storage, ATA LED control | `%lh` virtual LED | Five-pixel activity bitmap in the shared main SBS header | P3, implemented pending hardware |
 | QuickScreen | `HAVE_QUICKSCREEN` | `%cs=10`, themed UI viewport, and four name/value tag pairs | Preserve native four-way behavior inside `QUICK//` chrome | P2 / Milestone 7, implemented pending hardware |
 | Programmable hotkey | `HAVE_HOTKEY`; short `REC` in WPS | WPS hotkey is a user setting, not a visual tag | Never force it; document optional Show Track Info assignment | P0 policy, complete |
 | A-B repeat | `AB_REPEAT_ENABLE` | `%mm` includes A-B; WPS actions exist | Dedicated third repeat-strip frame | P1 / Milestone 3, implemented pending hardware |
 | Peak meters | Firmware peak-meter support; recorder draws native L/R meters, clip counter and trigger | Recorder-owned instrumentation inside Cyan viewport | Preserve native refresh and controls | P2 / Milestone 5, integrated pending hardware |
-| Database | Tag cache enabled | Normal database list and metadata tags | `MUSIC//`/native contextual browser | P0, implemented generically |
+| Database | Tag cache enabled | Normal database list and metadata tags | `MUSIC /` followed by the native list title | P0, implemented generically |
 | Album art/JPEG | Album art, bitmap scaling and JPEG decoding enabled | Album-art tags | Deliberately omitted from flagship WPS unless later testing justifies it | Non-goal for current WPS |
 | Plugins | 512 KiB plugin buffer; plugin framework | Plugin browser is a normal list; runtime normally plugin-owned; current Pitch is `pitch_screen.rock` | Style `TOOLS//` launcher; document external runtime surfaces and native Pitch | P3 / Milestone 7, complete to native boundary |
 | RTC / clock | No `CONFIG_RTC` in current H120 target config | `%cs=17` exists globally but should not occur on this target | Retain conditional `CLOCK//` compatibility chrome; do not invent an H120 clock body | Unavailable and documented |
@@ -39,11 +39,13 @@ use internally but a theme cannot directly inspect.
 ## Confirmed native-first boundaries
 
 1. Cyan can fully supply WPS and FM skins and shared SBS/list styling.
-2. Recording, Pitch, Time/Date, and many utility bodies are native screens;
-   `%cs` can select surrounding Cyan chrome but does not grant arbitrary body
-   replacement.
-3. S/PDIF capability is real hardware support, but no current general skin tag
-   has yet been verified for digital input/output state.
+2. Recording and many utility bodies remain native; `%cs` can select Cyan
+   chrome where the screen enables the theme, but does not grant arbitrary body
+   replacement. The researched Pitch implementation is plugin-owned, and H120
+   has no Time/Date screen; their SBS headers remain compatibility routes.
+3. `%St(rec source)` and `%St(spdif enable)` expose selected S/PDIF input and
+   the output-enable setting. These settings do not establish digital signal
+   lock or quality; native recording owns the live sample-rate display.
 4. Cyan must not write the WPS hotkey or force contrast/inversion settings.
 
 ## Sources

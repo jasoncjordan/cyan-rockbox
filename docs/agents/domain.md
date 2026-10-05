@@ -4,6 +4,8 @@ How the engineering skills should consume this repo's domain documentation when 
 
 ## Before exploring, read these
 
+For product scope and target constraints, read root `PRD.md` and `HARDWARE.md`. Use `docs/README.md` to find relevant project records: `docs/design.md` describes the implemented design baseline, `docs/rockbox-notes.md` records implementation mechanisms, and `docs/release.md` identifies outstanding release gates. Consult the relevant records before proposing changes to established behavior.
+
 This repo uses a **single-context** layout:
 
 - **`GLOSSARY.md`** at the repo root: read its domain terms.

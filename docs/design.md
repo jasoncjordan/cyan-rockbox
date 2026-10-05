@@ -1,14 +1,20 @@
 # Cyan// current H1x0 design baseline
 
 This document records the implemented design decisions for the H1x0 edition.
-The revised maximalist `PRD.md` remains authoritative if this summary conflicts
-with it; completed browser/WPS work is a baseline, not the end of scope.
+The revised maximalist [PRD](../PRD.md) remains authoritative if this summary
+conflicts with it; completed browser/WPS work is a baseline, not the end of scope.
 
 ## Product character
 
-Cyan// is a small technical instrument: terse, calm, high-contrast, and
-terminal-adjacent without fake shell decoration. Apple Music influences the
-information hierarchy only. The theme must not resemble an original iPod.
+The implemented Cyan// baseline is a small technical instrument: terse, calm,
+high-contrast, and terminal-adjacent without fake shell decoration. Apple Music
+influences the information hierarchy only. The theme must not resemble an
+original iPod.
+
+Future design work follows the PRD's expanded direction, including its explicit
+CLIAMP influence and restrained cyberpunk/cassette futurism vocabulary alongside
+Apple Music, modern TUI, and UNIX/workstation influences. The implementation
+details below remain the baseline for evaluating that work.
 
 ## Priority order
 

@@ -72,7 +72,7 @@ instructions cannot bypass permission controls.
 
 ### Issue tracker
 
-Issues and specs live in GitHub Issues for `jasoncjordan/cyan-rockbox`. See `docs/agents/issue-tracker.md`.
+Work tickets and new implementation specs live in GitHub Issues for `jasoncjordan/cyan-rockbox`; root `PRD.md` remains the product requirements and roadmap. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 

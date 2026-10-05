@@ -57,16 +57,21 @@ yet a theme-site-ready final release.
 
 Still required before calling 0.1.0 final:
 
-- CheckWPS for `iriverh120`
-- H120/H140 simulator load
-- physical H120 test with backlight on and off
-- physical long-string scrolling and state-transition test
-- compatible H1x0 remote test, including remote Hold and RSBS coverage
+- [CheckWPS for `iriverh120`](https://github.com/jasoncjordan/cyan-rockbox/issues/6)
+- [H120 simulator load and genuine screenshots](https://github.com/jasoncjordan/cyan-rockbox/issues/7)
+- [Physical H120/H140 main-player matrix](https://github.com/jasoncjordan/cyan-rockbox/issues/8),
+  including backlight, inversion, long-string scrolling, and state transitions
+- [Compatible H1x0 remote matrix](https://github.com/jasoncjordan/cyan-rockbox/issues/9),
+  including remote Hold and RSBS coverage
+
+CheckWPS gates simulator validation. The main-player and remote hardware checks
+follow the software passes and are tracked separately as human validation work.
 
 The exact command sequence and pass criteria for these gates are in
 [`final-validation.md`](final-validation.md). The complete physical screen and
-state matrix remains in [`testing.md`](testing.md). Both files are included in
-the distribution bundle.
+state matrix remains in [`testing.md`](testing.md), with screen-by-screen
+coverage in [`screen-matrix.md`](screen-matrix.md). All three files are included
+in the distribution bundle.
 
 Until those checks pass, the archive remains a release candidate rather than a
 theme-site-ready final release.
